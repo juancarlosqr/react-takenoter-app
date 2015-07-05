@@ -12,7 +12,6 @@ var Notes = React.createClass({
     return (
       <div>
         <h2>Notes</h2>
-        <h3>{this.props.username}</h3>
         <p><AddNote username={this.props.username} addNote={this.props.addNote} /></p>
         <p><NotesList notes={this.props.notes} /></p>
       </div>
