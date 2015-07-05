@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchGithub from './SearchGithub';
 import { RouteHandler } from 'react-router';
+import SearchGithub from './SearchGithub';
 
 class Main extends React.Component {
 	render () {
@@ -12,7 +12,7 @@ class Main extends React.Component {
           </div>
         </nav>
         <div className="container">
-          <RouteHandler />
+          <RouteHandler {...this.props} />
         </div>
       </div>
 		)
