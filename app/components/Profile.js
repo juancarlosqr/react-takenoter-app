@@ -5,23 +5,29 @@ var UserProfile = require('./Github/UserProfile');
 var Notes = require('./Notes/Notes');
 var Firebase = require('firebase');
 var ReactFireMixin = require('reactfire');
+var helpers = require('../utils/helpers');
 
 var Profile = React.createClass({
   mixins: [Router.State, ReactFireMixin],
   getInitialState: function(){
     return {
-      notes: [],
-      bio: {
-        name: 'Jhon Doe',
-        city: 'Montevideo'
-      },
-      repos: ['ember-app', 'react-app']
+      bio: {},
+      repos: [],
+      notes: []
     }
   },
   componentDidMount: function () {
     this.ref = new Firebase('https://react-takenoter-app.firebaseio.com/');
     var childRef = this.ref.child(this.getParams().username);
     this.bindAsArray(childRef, 'notes');
+
+    helpers.getGithubInfo(this.getParams().username)
+      .then(function (dataObj) {
+        this.setState({
+          bio: dataObj.bio,
+          repos: dataObj.repos
+        })
+      }.bind(this));
   },
   componentWillUnmount: function () {
     this.unbind('notes');
