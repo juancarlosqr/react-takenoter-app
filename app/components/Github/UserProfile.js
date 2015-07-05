@@ -1,10 +1,6 @@
 import React from 'react';
 
-var UserProfile = React.createClass({
-  propTypes: {
-    username: React.PropTypes.string.isRequired,
-    bio: React.PropTypes.object.isRequired
-  },
+class UserProfile extends React.Component {
   render () {
     var hasFollowers = (this.props.bio.followers && this.props.bio.followers !== 0 ? true : false),
         hasFollowing = (this.props.bio.following && this.props.bio.following !== 0 ? true : false),
@@ -27,6 +23,11 @@ var UserProfile = React.createClass({
       </div>
     )
   }
-});
+};
+
+UserProfile.propTypes = {
+  username: React.PropTypes.string.isRequired,
+  bio: React.PropTypes.object.isRequired
+};
 
 export default UserProfile;

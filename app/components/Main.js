@@ -2,7 +2,7 @@ import React from 'react';
 import SearchGithub from './SearchGithub';
 import { RouteHandler } from 'react-router';
 
-var Main = React.createClass({
+class Main extends React.Component {
 	render () {
 		return (
 			<div className="main-container">
@@ -17,6 +17,6 @@ var Main = React.createClass({
       </div>
 		)
 	}
-});
+};
 
 export default Main;
