@@ -3,18 +3,28 @@ var Router = require('react-router');
 var Repos = require('./Github/Repos');
 var UserProfile = require('./Github/UserProfile');
 var Notes = require('./Notes/Notes');
+var Firebase = require('firebase');
+var ReactFireMixin = require('reactfire');
 
 var Profile = React.createClass({
-  mixins: [Router.State],
+  mixins: [Router.State, ReactFireMixin],
   getInitialState: function(){
     return {
-      notes: ['Learn Ember', 'Learn React'],
+      notes: [],
       bio: {
         name: 'Jhon Doe',
         city: 'Montevideo'
       },
       repos: ['ember-app', 'react-app']
     }
+  },
+  componentDidMount: function () {
+    this.ref = new Firebase('https://react-takenoter-app.firebaseio.com/');
+    var childRef = this.ref.child(this.getParams().username);
+    this.bindAsArray(childRef, 'notes');
+  },
+  componentWillUnmount: function () {
+    this.unbind('notes');
   },
   render: function () {
     var username = this.getParams().username;

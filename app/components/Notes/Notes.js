@@ -1,5 +1,5 @@
 var React = require('react');
-var Router = require('react-router');
+var NotesList = require('./NotesList');
 
 var Notes = React.createClass({
   propTypes: {
@@ -11,7 +11,7 @@ var Notes = React.createClass({
       <div>
         <h2>Notes</h2>
         <h3>{this.props.username}</h3>
-        <p>{this.props.notes}</p>
+        <p><NotesList notes={this.props.notes} /></p>
       </div>
     )
   }
