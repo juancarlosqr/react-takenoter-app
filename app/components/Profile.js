@@ -1,22 +1,22 @@
-var React = require('react');
-var Router = require('react-router');
-var Repos = require('./Github/Repos');
-var UserProfile = require('./Github/UserProfile');
-var Notes = require('./Notes/Notes');
-var Firebase = require('firebase');
-var ReactFireMixin = require('reactfire');
-var helpers = require('../utils/helpers');
+import React from 'react';
+import Router from 'react-router';
+import Repos from './Github/Repos';
+import UserProfile from './Github/UserProfile';
+import Notes from './Notes/Notes';
+import Firebase from 'firebase';
+import ReactFireMixin from 'reactfire';
+import helpers from '../utils/helpers';
 
 var Profile = React.createClass({
   mixins: [Router.State, ReactFireMixin],
-  getInitialState: function(){
+  getInitialState () {
     return {
       bio: {},
       repos: [],
       notes: []
     }
   },
-  init: function () {
+  init () {
     var childRef = this.ref.child(this.getParams().username);
     this.bindAsArray(childRef, 'notes');
 
@@ -28,21 +28,21 @@ var Profile = React.createClass({
         })
       }.bind(this));
   },
-  componentDidMount: function () {
+  componentDidMount () {
     this.ref = new Firebase('https://react-takenoter-app.firebaseio.com/');
     this.init();
   },
-  componentWillUnmount: function () {
+  componentWillUnmount () {
     this.unbind('notes');
   },
-  componentWillReceiveProps: function () {
+  componentWillReceiveProps () {
     this.unbind('notes');
     this.init();
   },
-  handleAddNote: function (newNote) {
+  handleAddNote (newNote) {
     this.ref.child(this.getParams().username).set(this.state.notes.concat([newNote]));
   },
-  render: function () {
+  render () {
     var username = this.getParams().username;
     return (
       <div className="row">
@@ -63,4 +63,4 @@ var Profile = React.createClass({
   }
 });
 
-module.exports = Profile;
+export default Profile;

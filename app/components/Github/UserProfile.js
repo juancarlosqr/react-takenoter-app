@@ -1,11 +1,11 @@
-var React = require('react');
+import React from 'react';
 
 var UserProfile = React.createClass({
   propTypes: {
     username: React.PropTypes.string.isRequired,
     bio: React.PropTypes.object.isRequired
   },
-  render: function () {
+  render () {
     var hasFollowers = (this.props.bio.followers && this.props.bio.followers !== 0 ? true : false),
         hasFollowing = (this.props.bio.following && this.props.bio.following !== 0 ? true : false),
         hasPublicRepos = (this.props.bio.public_repos && this.props.bio.public_repos !== 0 ? true : false);
@@ -29,4 +29,4 @@ var UserProfile = React.createClass({
   }
 });
 
-module.exports = UserProfile;
+export default UserProfile;
